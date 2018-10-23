@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>p5.js example</title>
-    <style> body {padding: 0; margin: 0;} </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="p5.min.js"></script>
     <script src="sketch.js"></script>
-  </head>
-  <body>
-  </body>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="configuration">
+    <h1>Configuration</h1>
+    <hr/>
+    <div>
+        <label for="speed">Speed: <span id="currentSpeed"></span></label>
+        <br/>
+        <input type="range" min="-50" max="50" value="1" step="1" class="slider" id="speed">
+
+    </div>
+    <div>
+        <input type="radio" id="mode-mouse">
+        <label for="mode-mouse">Mouse</label>
+        <input type="radio" id="mode-time">
+        <label for="mode-time">Time</label>
+    </div>
+</div>
+
+</body>
 </html>

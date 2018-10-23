@@ -11,7 +11,6 @@ let halfMin;
 
 let stepX;
 let stepY;
-let theta = 0;
 let r;
 
 let history = [];
@@ -19,7 +18,42 @@ let historySize = 300;
 let st = 0;
 let aRad;
 
+let width;
+let height;
+
+let speed = 0.2;
+
+
+let colorSin = 'rgba(80%,0%,0%,0.5)';
+let colorCos = 'rgba(0%,80%,0%,0.5)';
+let colorHip = 'rgba(0%,0%,80%,0.5)';
+let colorTheta = 'rgba(0%,80%,80%,0.5)';
+
+
+function setupButtons() {
+    $("#speed").on("input", () => {
+
+        let x = parseFloat($("#speed").val());
+        let y = Math.pow(0.1*x,3);
+        console.log(x,y);
+        speed = parseFloat(y.toFixed(4));
+
+        console.log(Date(),speed, y ,x);
+
+        let realSpeed = (fr * speed).toFixed(2) + "º/s";
+
+        $("#currentSpeed").text(realSpeed);
+
+    })
+}
+
 function setup() {
+
+    setupButtons();
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
 
     for (let i = 0; i < historySize; i++) {
         history[i] = {cos: 0, sin: 0, theta: 0};
@@ -33,21 +67,25 @@ function setup() {
     stepX = (360 / windowWidth);
     stepY = (5 / windowHeight);
 
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(width, height);
 
 }
 
 function draw() {
 
-    halfW = windowWidth / 2;
-    halfH = windowHeight / 2;
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    halfW = width / 2;
+    halfH = height / 2;
     halfMin = Math.min(halfW, halfH);
     r = halfMin / 2;
 
-    A += offset;
-    // A=(mouseX * stepX + mouseY * stepY);
+    A += speed;
     if (A >= 360) {
         A -= 360;
+    }else if (A < 0){
+        A += 360;
     }
 
     aRad = (Math.PI / 180) * A;
@@ -72,18 +110,18 @@ function drawTrig(A) {
     let sin = Math.sin(aRad);
     let cos = Math.cos(aRad);
 
-    stroke(255, 100, 100);
+    stroke(colorSin);
     line(cos * r, 0, cos * r, -sin * r);
-    let sinText = sin.toFixed(3);
+    let sinText = sin.toFixed(4);
     fill(255, 100, 100);
     noStroke();
     text("sin(θ): " + sinText, cos * r + 5, -sin * r / 2);
 
 
-    stroke(100, 225, 100);
+    stroke(colorCos);
     fill(100, 225, 100);
     line(0, 0, cos * r, 0);
-    let cosText = cos.toFixed(3);
+    let cosText = cos.toFixed(4);
     noStroke();
     text("cos(θ): " + cosText, cos * r / 2 - 50, 20);
 
@@ -94,23 +132,23 @@ function drawTrig(A) {
 
 function drawEvent(e, t, s) {
 
-    let h=s;
+    let h = s;
     push();
 
     let posT = historySize + t;
 
-    stroke('rgba(100%,0%,0%,0.5)');
-    line(posT, h, posT, h - e.sin * s/4);
+    stroke(colorSin);
+    line(posT, h, posT, h - e.sin * s / 4);
 
-    h+=s;
+    h += s;
 
 
-    stroke('rgba(0%,100%,0%,0.5)');
-    line(posT, h, posT, h - e.cos * s/4);
+    stroke(colorCos);
+    line(posT, h, posT, h - e.cos * s / 4);
 
-    h+=s;
-    stroke('rgba(50%,50%,80%,0.5)');
-    let theta = map(e.theta,0,360,0,s/4);
+    h += s;
+    stroke(colorTheta);
+    let theta = map(e.theta, 0, 360, 0, s / 4);
     line(posT, h, posT, h - theta);
 
     pop();
@@ -120,8 +158,7 @@ function drawEvent(e, t, s) {
 
 function drawHistory(A) {
 
-    let height = 100;
-    let s = height / 2;
+    let h = height / 4;
 
     let event = {
         sin: Math.sin(aRad),
@@ -134,29 +171,24 @@ function drawHistory(A) {
     push();
     translate(10, 10);
 
-    drawEvent(event, 0, height);
+    drawEvent(event, 0, h);
 
     let j = -1;
     let i = st;
     for (; i > 0; i--, j--) {
-        drawEvent(history[i], j, height);
+        drawEvent(history[i], j, h);
     }
 
 
-    i = historySize-1;
+    i = historySize - 1;
     for (; i > st; i--, j--) {
-        drawEvent(history[i],j,height);
+        drawEvent(history[i], j, h);
     }
 
     st++;
     if (st > historySize) {
         st = 0;
     }
-
-    // for(let i=0;i<historySize;i++){
-    //     historySin[i]=historySin[i+1];
-    //     point(r+i,-historySin[i]*50);
-    // }
 
     pop();
 
@@ -166,8 +198,8 @@ function drawHistory(A) {
 function drawChart(A) {
 
     let theta = -A;
-    let angle = (A).toFixed(0);
-    let pirad = (angle / 180).toFixed(2);
+    let angle = (A).toFixed(4);
+    let pirad = (angle / 180).toFixed(4);
 
     push();
     translate(halfW, halfH);
@@ -176,7 +208,7 @@ function drawChart(A) {
     ellipse(0, 0, 10, 10);
 
     push();
-    fill('rgba(50%,50%,80%,0.5)');
+    fill(colorTheta);
     arc(0, 0, r / 3, r / 3, theta, 0);
     pop();
 
@@ -188,11 +220,11 @@ function drawChart(A) {
 
     fill('rgba(0%,0%,0%,0.5)');
     noStroke();
-    rect(r + 20, -10, 140, 20);
+    rect(r + 20, -10, 190, 20);
     fill(255);
     text("θ: " + angle + "º (" + pirad + "π×rad)", r + 25, +5);
     pop();
-    stroke(128, 128, 200);
+    stroke(colorHip);
     strokeWeight(2);
 
     ellipse(r, 0, 5, 5);
@@ -208,13 +240,13 @@ function drawBoard() {
 
     stroke(150);
     ellipse(halfW, halfH, halfMin, halfMin);
-    line(0, halfH, windowWidth, halfH);
-    line(halfW, 0, halfW, windowHeight);
+    line(0, halfH, width, halfH);
+    line(halfW, 0, halfW, height);
 
     fill(0);
     stroke(200);
 
-    text("X", windowWidth - 50, halfH - s);
+    text("X", width - 50, halfH - s);
     text("Y", halfW + s, 50);
 
     translate(halfW, halfH);
