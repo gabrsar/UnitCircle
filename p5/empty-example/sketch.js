@@ -14,7 +14,17 @@ let stepY;
 let theta = 0;
 let r;
 
+let history = [];
+let historySize = 300;
+let st = 0;
+let aRad;
+
 function setup() {
+
+    for (let i = 0; i < historySize; i++) {
+        history[i] = {cos: 0, sin: 0, theta: 0};
+    }
+
     A = map(new Date().getSeconds(), 0, 60, 0, 360);
     angleMode(DEGREES); // Change the mode to DEGREES
 
@@ -35,30 +45,28 @@ function draw() {
     r = halfMin / 2;
 
     A += offset;
-    //A=(mouseX * stepX + mouseY * stepY);
+    // A=(mouseX * stepX + mouseY * stepY);
     if (A >= 360) {
         A -= 360;
     }
+
+    aRad = (Math.PI / 180) * A;
 
     background(200);
     drawBoard();
 
 
     drawScale();
-
     drawChart(A);
-
-    drawSin(A);
-
+    drawTrig(A);
+    drawHistory(A);
 }
 
 
-function drawSin(A) {
+function drawTrig(A) {
     push();
 
     translate(halfW, halfH);
-
-    let aRad = (Math.PI / 180) * A;
 
     strokeWeight(2);
     let sin = Math.sin(aRad);
@@ -83,6 +91,77 @@ function drawSin(A) {
 
     pop();
 }
+
+function drawEvent(e, t, s) {
+
+    let h=s;
+    push();
+
+    let posT = historySize + t;
+
+    stroke('rgba(100%,0%,0%,0.5)');
+    line(posT, h, posT, h - e.sin * s/4);
+
+    h+=s;
+
+
+    stroke('rgba(0%,100%,0%,0.5)');
+    line(posT, h, posT, h - e.cos * s/4);
+
+    h+=s;
+    stroke('rgba(50%,50%,80%,0.5)');
+    let theta = map(e.theta,0,360,0,s/4);
+    line(posT, h, posT, h - theta);
+
+    pop();
+
+}
+
+
+function drawHistory(A) {
+
+    let height = 100;
+    let s = height / 2;
+
+    let event = {
+        sin: Math.sin(aRad),
+        cos: Math.cos(aRad),
+        theta: A
+    };
+
+    history[st] = event;
+
+    push();
+    translate(10, 10);
+
+    drawEvent(event, 0, height);
+
+    let j = -1;
+    let i = st;
+    for (; i > 0; i--, j--) {
+        drawEvent(history[i], j, height);
+    }
+
+
+    i = historySize-1;
+    for (; i > st; i--, j--) {
+        drawEvent(history[i],j,height);
+    }
+
+    st++;
+    if (st > historySize) {
+        st = 0;
+    }
+
+    // for(let i=0;i<historySize;i++){
+    //     historySin[i]=historySin[i+1];
+    //     point(r+i,-historySin[i]*50);
+    // }
+
+    pop();
+
+}
+
 
 function drawChart(A) {
 
