@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6a18bda1-922c-454b-aeaa-d0c6eaa1b2cd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnitCircle.html" beforeDir="false" afterPath="$PROJECT_DIR$/UnitCircle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sketch.js" beforeDir="false" afterPath="$PROJECT_DIR$/sketch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
-    </list>
+    <list default="true" id="6a18bda1-922c-454b-aeaa-d0c6eaa1b2cd" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -22,7 +17,7 @@
         <entry file="file://$PROJECT_DIR$/sketch.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="659">
-              <caret line="161" column="47" selection-start-line="161" selection-start-column="47" selection-end-line="161" selection-end-column="47" />
+              <caret line="160" column="47" selection-start-line="160" selection-start-column="47" selection-end-line="160" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -170,16 +165,15 @@
       <workItem from="1540276689385" duration="7063000" />
       <workItem from="1541123784201" duration="845000" />
       <workItem from="1541168094496" duration="601000" />
-      <workItem from="1542763805127" duration="3664000" />
+      <workItem from="1542763805127" duration="3800000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21618000" />
+    <option name="totallyTimeSpent" value="21754000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1276" height="1404" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.32031873" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -192,8 +186,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.13145539" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32942098" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.41079813" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50039905" side_tool="true" weight="0.39937106" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -244,7 +238,7 @@
     <entry file="file://$PROJECT_DIR$/sketch.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="659">
-          <caret line="161" column="47" selection-start-line="161" selection-start-column="47" selection-end-line="161" selection-end-column="47" />
+          <caret line="160" column="47" selection-start-line="160" selection-start-column="47" selection-end-line="160" selection-end-column="47" />
         </state>
       </provider>
     </entry>
