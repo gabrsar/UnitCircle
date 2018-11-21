@@ -8,6 +8,12 @@ h1 {
     margin: 0;
 }
 
+#speed {
+    width: 100%;
+    padding: 0;
+    margin: 1em 0 0 0;
+}
+
 #configuration {
     position: absolute;
     bottom: 1em;
